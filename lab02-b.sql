@@ -1,9 +1,0 @@
-ALTER TABLE pcs ADD CONSTRAINT pcpk PRIMARY KEY (id);
-ALTER TABLE soft ADD CONSTRAINT sopk PRIMARY KEY (id);
-ALTER TABLE rooms ADD CONSTRAINT ropk PRIMARY KEY (id);
-ALTER TABLE employees ADD CONSTRAINT emppk PRIMARY KEY (id);
-
-ALTER TABLE installs ADD CONSTRAINT id_installs_pcs FOREIGN KEY (pc_id) REFERENCES pcs (id);
-ALTER TABLE installs ADD CONSTRAINT id_installs_soft FOREIGN KEY (soft_id) REFERENCES soft (id);
-ALTER TABLE pcs ADD CONSTRAINT id_pcs_soft FOREIGN KEY (room_id) REFERENCES rooms (id);
-ALTER TABLE rooms ADD CONSTRAINT id_rooms_empl FOREIGN KEY (emp_id) REFERENCES employees (id);
