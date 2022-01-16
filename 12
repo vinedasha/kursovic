@@ -1,0 +1,45 @@
+<Plugin postgresql>
+ <Query q_numbackends>
+        Statement "SELECT SUM(numbackends) AS res FROM pg_stat_database;"
+        <Result>
+        Type gauge
+        InstancePrefix "fam"
+        ValuesFrom res
+        </Result>
+        </Query>
+
+<Query q_tuples>
+   Statement "SELECT SUM(tup_inserted) AS tons, SUM(tup_updated) AS tapd, SUM(tup_deleted) AS tdol, SUM(tup_returned) AS trot FROM pg_start_datebase WHERE datname = 'lab03_var01';"
+        <Result>
+Type counter
+InstancePrefix "tuples-updated"
+ValuesFrom tapd
+        </Result>
+        <Result>
+Type counter
+InstancePrefix "tuples-returned"
+ValuesFrom trot
+        </Result>
+        <Result>
+Type counter
+InstancePrefix "tuples-inserted"
+ValuesFrom tons
+        </Result>
+        <Result>
+Type counter
+InstancePrefix "tuples-deleted"
+ValuesFrom tdol
+        </Result>
+        </Query>
+
+<Database postgres>
+Host "172.16.0.3"
+Port 5432
+User "postgres"
+Password "password"
+Query q_numbackends
+Query q_tuples
+</Database>
+</Plugin>
+
+
