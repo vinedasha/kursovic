@@ -1,0 +1,203 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Aggregate",
+      "Strategy": "Hashed",
+      "Partial Mode": "Simple",
+      "Parallel Aware": false,
+      "Startup Cost": 274.57,
+      "Total Cost": 275.76,
+      "Plan Rows": 119,
+      "Plan Width": 1088,
+      "Group Key": [
+        "f.id_people",
+        "r.firma",
+        "r.adrec",
+        "r.dolgnost",
+        "f.nme",
+        "f.surname",
+        "f.otch"
+      ],
+      "Planned Partitions": 0,
+      "Plans": [
+        {
+          "Node Type": "Hash Join",
+          "Parent Relationship": "Outer",
+          "Parallel Aware": false,
+          "Join Type": "Inner",
+          "Startup Cost": 258.95,
+          "Total Cost": 272.49,
+          "Plan Rows": 119,
+          "Plan Width": 1088,
+          "Inner Unique": true,
+          "Hash Cond": "(r.id_people = f.id_people)",
+          "Plans": [
+            {
+              "Node Type": "Hash Join",
+              "Parent Relationship": "Outer",
+              "Parallel Aware": false,
+              "Join Type": "Inner",
+              "Startup Cost": 246.25,
+              "Total Cost": 259.47,
+              "Plan Rows": 119,
+              "Plan Width": 504,
+              "Inner Unique": true,
+              "Hash Cond": "(r.id_people = families.id_people)",
+              "Plans": [
+                {
+                  "Node Type": "Seq Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Relation Name": "rabota",
+                  "Alias": "r",
+                  "Startup Cost": 0,
+                  "Total Cost": 11.5,
+                  "Plan Rows": 149,
+                  "Plan Width": 496,
+                  "Filter": "(firma IS NOT NULL)"
+                },
+                {
+                  "Node Type": "Hash",
+                  "Parent Relationship": "Inner",
+                  "Parallel Aware": false,
+                  "Startup Cost": 244.75,
+                  "Total Cost": 244.75,
+                  "Plan Rows": 120,
+                  "Plan Width": 8,
+                  "Plans": [
+                    {
+                      "Node Type": "Aggregate",
+                      "Strategy": "Hashed",
+                      "Partial Mode": "Simple",
+                      "Parent Relationship": "Outer",
+                      "Parallel Aware": false,
+                      "Startup Cost": 243.55,
+                      "Total Cost": 244.75,
+                      "Plan Rows": 120,
+                      "Plan Width": 8,
+                      "Group Key": [
+                        "families.id_people"
+                      ],
+                      "Planned Partitions": 0,
+                      "Plans": [
+                        {
+                          "Node Type": "Hash Join",
+                          "Parent Relationship": "Outer",
+                          "Parallel Aware": false,
+                          "Join Type": "Inner",
+                          "Startup Cost": 144.9,
+                          "Total Cost": 237.43,
+                          "Plan Rows": 2448,
+                          "Plan Width": 8,
+                          "Inner Unique": true,
+                          "Hash Cond": "(deti_roditeli.id_children = families.id_people)",
+                          "Plans": [
+                            {
+                              "Node Type": "Aggregate",
+                              "Strategy": "Hashed",
+                              "Partial Mode": "Simple",
+                              "Parent Relationship": "Outer",
+                              "Parallel Aware": false,
+                              "Startup Cost": 132.2,
+                              "Total Cost": 173,
+                              "Plan Rows": 4080,
+                              "Plan Width": 4,
+                              "Group Key": [
+                                "deti_roditeli.id_children"
+                              ],
+                              "Planned Partitions": 0,
+                              "Plans": [
+                                {
+                                  "Node Type": "Append",
+                                  "Parent Relationship": "Outer",
+                                  "Parallel Aware": false,
+                                  "Startup Cost": 0,
+                                  "Total Cost": 122,
+                                  "Plan Rows": 4080,
+                                  "Plan Width": 4,
+                                  "Subplans Removed": 0,
+                                  "Plans": [
+                                    {
+                                      "Node Type": "Seq Scan",
+                                      "Parent Relationship": "Member",
+                                      "Parallel Aware": false,
+                                      "Relation Name": "deti_roditeli",
+                                      "Alias": "deti_roditeli",
+                                      "Startup Cost": 0,
+                                      "Total Cost": 30.4,
+                                      "Plan Rows": 2040,
+                                      "Plan Width": 4
+                                    },
+                                    {
+                                      "Node Type": "Seq Scan",
+                                      "Parent Relationship": "Member",
+                                      "Parallel Aware": false,
+                                      "Relation Name": "deti_roditeli",
+                                      "Alias": "deti_roditeli_1",
+                                      "Startup Cost": 0,
+                                      "Total Cost": 30.4,
+                                      "Plan Rows": 2040,
+                                      "Plan Width": 4
+                                    }
+                                  ]
+                                }
+                              ]
+                            },
+                            {
+                              "Node Type": "Hash",
+                              "Parent Relationship": "Inner",
+                              "Parallel Aware": false,
+                              "Startup Cost": 11.2,
+                              "Total Cost": 11.2,
+                              "Plan Rows": 120,
+                              "Plan Width": 4,
+                              "Plans": [
+                                {
+                                  "Node Type": "Seq Scan",
+                                  "Parent Relationship": "Outer",
+                                  "Parallel Aware": false,
+                                  "Relation Name": "families",
+                                  "Alias": "families",
+                                  "Startup Cost": 0,
+                                  "Total Cost": 11.2,
+                                  "Plan Rows": 120,
+                                  "Plan Width": 4
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "Node Type": "Hash",
+              "Parent Relationship": "Inner",
+              "Parallel Aware": false,
+              "Startup Cost": 11.2,
+              "Total Cost": 11.2,
+              "Plan Rows": 120,
+              "Plan Width": 596,
+              "Plans": [
+                {
+                  "Node Type": "Seq Scan",
+                  "Parent Relationship": "Outer",
+                  "Parallel Aware": false,
+                  "Relation Name": "families",
+                  "Alias": "f",
+                  "Startup Cost": 0,
+                  "Total Cost": 11.2,
+                  "Plan Rows": 120,
+                  "Plan Width": 596
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  }
+]
