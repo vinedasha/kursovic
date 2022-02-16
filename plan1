@@ -1,0 +1,15 @@
+[
+  {
+    "Plan": {
+      "Node Type": "Seq Scan",
+      "Parallel Aware": false,
+      "Relation Name": "families",
+      "Alias": "families",
+      "Startup Cost": 0,
+      "Total Cost": 12.1,
+      "Plan Rows": 1,
+      "Plan Width": 596,
+      "Filter": "((nme = 'Alisa'::bpchar) AND (surname = 'Larina'::bpchar) AND (otch = 'Romanovna'::bpchar))"
+    }
+  }
+]
