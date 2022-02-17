@@ -1,15 +1,2 @@
-[
-  {
-    "Plan": {
-      "Node Type": "Seq Scan",
-      "Parallel Aware": false,
-      "Relation Name": "families",
-      "Alias": "families",
-      "Startup Cost": 0,
-      "Total Cost": 11.8,
-      "Plan Rows": 1,
-      "Plan Width": 600,
-      "Filter": "((god_rogd < 2002) AND (eg_dohod = 0))"
-    }
-  }
-]
+Seq Scan on families  (cost=0.00..11.80 rows=1 width=600)
+  Filter: ((god_rogd < 2002) AND (eg_dohod = 0))
