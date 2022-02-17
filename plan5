@@ -1,117 +1,13 @@
-[
-  {
-    "Plan": {
-      "Node Type": "Aggregate",
-      "Strategy": "Plain",
-      "Partial Mode": "Simple",
-      "Parallel Aware": false,
-      "Startup Cost": 99.71,
-      "Total Cost": 99.72,
-      "Plan Rows": 1,
-      "Plan Width": 8,
-      "Plans": [
-        {
-          "Node Type": "Hash Join",
-          "Parent Relationship": "Outer",
-          "Parallel Aware": false,
-          "Join Type": "Semi",
-          "Startup Cost": 55.68,
-          "Total Cost": 98.19,
-          "Plan Rows": 609,
-          "Plan Width": 4,
-          "Inner Unique": false,
-          "Hash Cond": "(deti_roditeli.id_children = fa.id_people)",
-          "Plans": [
-            {
-              "Node Type": "Seq Scan",
-              "Parent Relationship": "Outer",
-              "Parallel Aware": false,
-              "Relation Name": "deti_roditeli",
-              "Alias": "deti_roditeli",
-              "Startup Cost": 0,
-              "Total Cost": 30.4,
-              "Plan Rows": 2030,
-              "Plan Width": 8,
-              "Filter": "(id_bliznec IS NOT NULL)"
-            },
-            {
-              "Node Type": "Hash",
-              "Parent Relationship": "Inner",
-              "Parallel Aware": false,
-              "Startup Cost": 54.93,
-              "Total Cost": 54.93,
-              "Plan Rows": 60,
-              "Plan Width": 8,
-              "Plans": [
-                {
-                  "Node Type": "Hash Join",
-                  "Parent Relationship": "Outer",
-                  "Parallel Aware": false,
-                  "Join Type": "Inner",
-                  "Startup Cost": 42.75,
-                  "Total Cost": 54.93,
-                  "Plan Rows": 60,
-                  "Plan Width": 8,
-                  "Inner Unique": true,
-                  "Hash Cond": "(fa.id_people = f.id_people)",
-                  "Plans": [
-                    {
-                      "Node Type": "Seq Scan",
-                      "Parent Relationship": "Outer",
-                      "Parallel Aware": false,
-                      "Relation Name": "families",
-                      "Alias": "fa",
-                      "Startup Cost": 0,
-                      "Total Cost": 11.2,
-                      "Plan Rows": 120,
-                      "Plan Width": 4
-                    },
-                    {
-                      "Node Type": "Hash",
-                      "Parent Relationship": "Inner",
-                      "Parallel Aware": false,
-                      "Startup Cost": 40.25,
-                      "Total Cost": 40.25,
-                      "Plan Rows": 200,
-                      "Plan Width": 4,
-                      "Plans": [
-                        {
-                          "Node Type": "Aggregate",
-                          "Strategy": "Hashed",
-                          "Partial Mode": "Simple",
-                          "Parent Relationship": "Outer",
-                          "Parallel Aware": false,
-                          "Startup Cost": 38.25,
-                          "Total Cost": 40.25,
-                          "Plan Rows": 200,
-                          "Plan Width": 4,
-                          "Group Key": [
-                            "f.id_people"
-                          ],
-                          "Planned Partitions": 0,
-                          "Plans": [
-                            {
-                              "Node Type": "Seq Scan",
-                              "Parent Relationship": "Outer",
-                              "Parallel Aware": false,
-                              "Relation Name": "family_obqed",
-                              "Alias": "f",
-                              "Startup Cost": 0,
-                              "Total Cost": 32.6,
-                              "Plan Rows": 2260,
-                              "Plan Width": 4
-                            }
-                          ]
-                        }
-                      ]
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
-    }
-  }
-]
+"Aggregate  (cost=99.71..99.72 rows=1 width=8)"
+"  ->  Hash Semi Join  (cost=55.68..98.19 rows=609 width=4)"
+"        Hash Cond: (deti_roditeli.id_children = fa.id_people)"
+"        ->  Seq Scan on deti_roditeli  (cost=0.00..30.40 rows=2030 width=8)"
+"              Filter: (id_bliznec IS NOT NULL)"
+"        ->  Hash  (cost=54.93..54.93 rows=60 width=8)"
+"              ->  Hash Join  (cost=42.75..54.93 rows=60 width=8)"
+"                    Hash Cond: (fa.id_people = f.id_people)"
+"                    ->  Seq Scan on families fa  (cost=0.00..11.20 rows=120 width=4)"
+"                    ->  Hash  (cost=40.25..40.25 rows=200 width=4)"
+"                          ->  HashAggregate  (cost=38.25..40.25 rows=200 width=4)"
+"                                Group Key: f.id_people"
+"                                ->  Seq Scan on family_obqed f  (cost=0.00..32.60 rows=2260 width=4)"
